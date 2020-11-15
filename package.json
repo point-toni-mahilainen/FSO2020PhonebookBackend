@@ -1,0 +1,27 @@
+{
+  "name": "phonebook-backend",
+  "version": "0.0.1",
+  "description": "Back end for a web app in Full Stack Open 2020 course",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/point-toni-mahilainen/FSO2020PhonebookBackend.git"
+  },
+  "author": "Toni Mahilainen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/point-toni-mahilainen/FSO2020PhonebookBackend/issues"
+  },
+  "homepage": "https://github.com/point-toni-mahilainen/FSO2020PhonebookBackend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
