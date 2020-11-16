@@ -59,6 +59,18 @@ app.post('/api/persons', (request, response) => {
         })
     }
 
+    if (!body.name) {
+        return response.status(400).json({
+            error: 'Name is required'
+        })
+    }
+
+    if (!body.number) {
+        return response.status(400).json({
+            error: 'Number is required'
+        })
+    }
+
     const newPerson = {
         name: body.name,
         number: body.number,
