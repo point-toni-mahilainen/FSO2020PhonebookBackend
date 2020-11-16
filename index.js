@@ -1,8 +1,21 @@
-const { request, response } = require('express')
 const express = require('express')
 const app = express()
+var morgan = require('morgan')
 
 app.use(express.json())
+app.use(morgan((tokens, req, res) => {
+    const isPost = tokens.method(req) === 'POST';
+    const reqBody = JSON.stringify(isPost ? req.body : '')
+    console.log(tokens);
+    return ([
+        tokens.method(req, res),
+        tokens.url(req, res),
+        tokens.status(req, res),
+        tokens.res(req, res, 'content-length'), '-',
+        tokens['response-time'](req, res), 'ms',
+        reqBody
+    ].join(' '))
+}))
 
 let persons = [
     {
@@ -52,7 +65,7 @@ app.post('/api/persons', (request, response) => {
     const body = request.body
     const nameExists = persons.find(person => person.name === body.name)
 
-    
+
     if (nameExists) {
         return response.status(400).json({
             error: 'Name is already added to the phonebook'
