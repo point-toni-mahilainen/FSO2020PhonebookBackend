@@ -17,29 +17,34 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFind
 const personSchema = new mongoose.Schema({
     id: Number,
     name: String,
-    number: Number
+    number: String
 })
 
 const Person = mongoose.model('Person', personSchema)
 
-Note.find({ important: false }).then(result => {
-    result.forEach(note => {
-        console.log(note)
-    })
-    mongoose.connection.close()
-})
-
-const person = new Person({
-    id: generateId(0, 10000),
-    name: String,
-    number: Number
-})
-
-person.save().then(response => {
-    console.log('Person saved!')
-    mongoose.connection.close()
-})
-
 const generateId = (min, max) => {
     return Number((Math.random() * (max - min) + min).toFixed(0))
+}
+
+if (name && number) {
+    const person = new Person({
+        id: generateId(0, 10000),
+        name: name,
+        number: number
+    })
+
+    person.save()
+        .then(response => {
+            console.log('Person saved!')
+            mongoose.connection.close()
+        })
+} else {
+    Person.find({})
+        .then(result => {
+            console.log('Phonebook:');
+            result.forEach(person => {
+                console.log(person.name, person.number);
+            })
+            mongoose.connection.close()
+        })
 }
