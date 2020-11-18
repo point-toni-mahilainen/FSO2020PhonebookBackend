@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/persons/5fb3f0d064acfd1428308021
+Content-Type: application/json
+
+{
+    "name": "Teppo Nurminen",
+    "number": "044-1234567"
+}
