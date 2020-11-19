@@ -4,6 +4,7 @@ const app = express()
 var morgan = require('morgan')
 const cors = require('cors')
 const Person = require('./models/person')
+const { response, request } = require('express')
 
 app.use(express.json())
 app.use(express.static('build'))
@@ -69,6 +70,12 @@ app.get('/api/persons/:id', (request, response, next) => {
 
 app.post('/api/persons', (request, response, next) => {
     const body = request.body
+
+    if (!body.content) {
+        return response.status(400).json({
+            error: 'content missing'
+        })
+    }
 
     const newPerson = new Person({
         name: body.name,
